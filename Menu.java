@@ -3,7 +3,7 @@ package homework.kiosk;
 class Menu {
 
     String name;
-    float price;
+    double price;
     String desc;
 
     public Menu() {
