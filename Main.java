@@ -61,6 +61,9 @@ public class Main {
                 case 6:
                     order.cancel();
                     break;
+                case 0:
+                    order.hidden();
+                    break;
                 default:
             }
         }
