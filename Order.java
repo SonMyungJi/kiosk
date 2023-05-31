@@ -82,7 +82,7 @@ class Order {
             for (Map.Entry<String[], Integer> entry : cart.entrySet()) {
                 String[] item = entry.getKey();
                 int count = entry.getValue();
-                String productKey = Arrays.toString(item);
+                String productKey = item[0];
                 int soldCount = soldProducts.getOrDefault(productKey, 0);
                 soldProducts.put(productKey, soldCount + count);
             }
@@ -115,9 +115,9 @@ class Order {
         System.out.println("현재까지 총 판매된 상품 목록은 아래와 같습니다.");
         System.out.println();
         for (Map.Entry<String, Integer> entry : soldProducts.entrySet()) {
-            String item = entry.getKey();
+            String productKey = entry.getKey();
             int count = entry.getValue();
-            System.out.printf(item + "%2d개\n", count);
+            System.out.printf("%s %2d개\n", productKey, count);
         }
         System.out.println();
         System.out.println("1. 돌아가기");
