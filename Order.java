@@ -23,8 +23,8 @@ class Order {
     // 장바구니에 객체 추가
     // 주문 개수 기능 추가
     private float totalSum;
-    private HashMap<String[], Integer> cart = new HashMap<>();
-    private HashMap<String, Integer> soldProducts = new HashMap<String, Integer>();
+    private final HashMap<String[], Integer> cart = new HashMap<>();
+    private final LinkedHashMap<String[], Integer> soldProducts = new LinkedHashMap<>();
 
     public void addToCart(String[] selectedMenu) {
         // 이미 선택된 메뉴인지 확인
@@ -82,9 +82,8 @@ class Order {
             for (Map.Entry<String[], Integer> entry : cart.entrySet()) {
                 String[] item = entry.getKey();
                 int count = entry.getValue();
-                String productKey = item[0];
-                int soldCount = soldProducts.getOrDefault(productKey, 0);
-                soldProducts.put(productKey, soldCount + count);
+                String[] productKey = new String[]{item[0], "W "+item[1]};
+                soldProducts.put(productKey, count);
             }
 
             cart.clear();
@@ -114,10 +113,10 @@ class Order {
         System.out.println("[ 총 판매상품 목록 현황 ]");
         System.out.println("현재까지 총 판매된 상품 목록은 아래와 같습니다.");
         System.out.println();
-        for (Map.Entry<String, Integer> entry : soldProducts.entrySet()) {
-            String productKey = entry.getKey();
+        for (Map.Entry<String[], Integer> entry : soldProducts.entrySet()) {
+            String[] productKey = entry.getKey();
             int count = entry.getValue();
-            System.out.printf("%s %2d개\n", productKey, count);
+            System.out.println(Arrays.toString(productKey));
         }
         System.out.println();
         System.out.println("1. 돌아가기");
