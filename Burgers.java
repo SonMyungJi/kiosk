@@ -33,7 +33,7 @@ class Burgers extends Menu {
         int choice = scanner.nextInt();
         int i = choice - 1; // Calculate and store the index
         if (i >= 0 && i < burgersArray.length) {
-            System.out.println(Arrays.toString(burgersArray[i]));
+            System.out.println(burgersArray[i][0] + " W " + burgersArray[i][1] + " " + burgersArray[i][2]);
             System.out.println("위 메뉴에 옵션을 추가하시겠습니까?\n1. 확인\n2. 취소");
             int optionChoice = scanner.nextInt();
             if (optionChoice == 1) {
@@ -49,7 +49,7 @@ class Burgers extends Menu {
                     // Handle invalid user choice
                 }
             } else if (optionChoice == 2) {
-                System.out.println(Arrays.toString(burgersArray[i]));
+                System.out.println(burgersArray[i][0] + " W " + burgersArray[i][1] + " " + burgersArray[i][2]);
                 System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?\n1. 확인\n2. 취소");
                 int userChoice2 = scanner.nextInt();
                 if (userChoice2 == 1) {
