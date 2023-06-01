@@ -28,48 +28,60 @@ class Burgers extends Menu {
         }
     }
 
+
     public void selectMenu(Scanner scanner, Order order) {
         int choice = scanner.nextInt();
-        int index = choice - 1; // Calculate and store the index
-        if (index >= 0 && index < burgersArray.length) {
-            System.out.println(Arrays.toString(burgersArray[index]));
+        int i = choice - 1; // Calculate and store the index
+        if (i >= 0 && i < burgersArray.length) {
+            System.out.println(Arrays.toString(burgersArray[i]));
             System.out.println("위 메뉴에 옵션을 추가하시겠습니까?\n1. 확인\n2. 취소");
             int optionChoice = scanner.nextInt();
-            boolean option;
             if (optionChoice == 1) {
-                option = true;
-                ArrayList<String> optionList = getOption(scanner, index);
-                System.out.println(optionList.get(0)+" W "+optionList.get(1)+" "+optionList.get(2));
+                ArrayList<String> optionList = getOption(scanner, i);
+                System.out.println(optionList.get(0) + " W " + optionList.get(1) + " " + optionList.get(2));
                 System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?\n1. 확인\n2. 취소");
-                int userChoice = scanner.nextInt();
-                if (userChoice == 1) {
+                int userChoice1 = scanner.nextInt();
+                if (userChoice1 == 1) {
                     System.out.println(optionList.get(0) + "가 장바구니에 추가되었습니다.");
                     String[] selectedMenu = optionList.toArray(new String[0]);
                     order.addToCart(selectedMenu);
+                } else {
+                    // Handle invalid user choice
                 }
             } else if (optionChoice == 2) {
-                option = false;
+                System.out.println(Arrays.toString(burgersArray[i]));
+                System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?\n1. 확인\n2. 취소");
+                int userChoice2 = scanner.nextInt();
+                if (userChoice2 == 1) {
+                    System.out.println(burgersArray[i][0] + "가 장바구니에 추가되었습니다.");
+                    String[] selectedMenu = burgersArray[i];
+                    order.addToCart(selectedMenu);
+                } else {
+                    // Handle invalid user choice
+                }
             } else {
                 // Handle invalid option choice
             }
+        } else {
+            // Handle invalid burger choice
         }
     }
 
-    public ArrayList<String> getOption(Scanner scanner, int index) {
+    public ArrayList<String> getOption(Scanner scanner, int j) {
         ArrayList<String> optionList = new ArrayList<>();
         System.out.println("1. Single\n2. Double");
         int optionChoice = scanner.nextInt();
         if (optionChoice == 1) {
-            String burgerName = burgersArray[index][0] + "(Single)";
-            String burgerPrice = burgersArray[index][1];
-            String burgerDesc = burgersArray[index][2];
+            String burgerName = burgersArray[j][0] + "(Single)";
+            String burgerPrice = burgersArray[j][1];
+            String burgerDesc = burgersArray[j][2];
             optionList.add(burgerName);
             optionList.add(burgerPrice);
             optionList.add(burgerDesc);
         } else if (optionChoice == 2) {
-            String burgerName = burgersArray[index][0] + "(Double)";
-            double burgerPrice = Double.parseDouble(burgersArray[index][1]) + 3.6;
-            String burgerDesc = burgersArray[index][2];
+            String burgerName = burgersArray[j][0] + "(Double)";
+            double burgerPrice = Double.parseDouble(burgersArray[j][1]) + 3.6;
+            String burgerDesc = burgersArray[j][2];
             optionList.add(burgerName);
             optionList.add(String.valueOf(burgerPrice));
             optionList.add(burgerDesc);
@@ -78,4 +90,5 @@ class Burgers extends Menu {
         }
         return optionList;
     }
+
 }
