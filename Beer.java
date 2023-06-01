@@ -1,6 +1,7 @@
 package homework.kiosk;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Beer extends Menu {
@@ -14,8 +15,8 @@ public class Beer extends Menu {
         System.out.println();
         System.out.println("[ Beer MENU ]");
         for (int i = 0; i < beerArray.length; i++) {
-            String[] beer = beerArray[i];
-            System.out.println((i + 1) + ". " + beer[0] + " W " + beer[1] + " " + beer[2]);
+            String output = beerArray[i][0] + " W " + beerArray[i][1] + " " + beerArray[i][2];
+            System.out.println((i + 1) + ". " + output);
         }
     }
 
@@ -24,13 +25,15 @@ public class Beer extends Menu {
         int choice = scanner.nextInt();
         int i = choice -1;
         if (i >= 0 && i < beerArray.length){
-            System.out.println(Arrays.toString(beerArray[i]));
+            String output = beerArray[i][0] + " W " + beerArray[i][1] + " " + beerArray[i][2];
+            System.out.println(output);
             System.out.println("위 메뉴를 장바구니에 추가하시겠습니까? \n1. 확인\n2. 취소");
             int userChoice = scanner.nextInt();
             if (userChoice == 1) {
                 System.out.println((beerArray[i][0]) + "가 장바구니에 추가되었습니다.");
                 String[] selectedMenu = beerArray[i];
-                order.addToCart(selectedMenu);
+                List<String> selectedMenuList = Arrays.asList(selectedMenu);
+                order.addToCart(selectedMenuList);
             }
         }
     }

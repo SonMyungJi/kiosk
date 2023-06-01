@@ -1,6 +1,7 @@
 package homework.kiosk;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 class Burgers extends Menu {
@@ -18,25 +19,56 @@ class Burgers extends Menu {
         System.out.println("아래 상품메뉴판을 보시고 상품을 골라 입력해주세요.\n");
         System.out.println("[ Burgers MENU ]");
         for (int i = 0; i < burgersArray.length; i++) {
-            String[] burgers = burgersArray[i];
-            System.out.println((i + 1) + ". " + burgers[0] + " W " + burgers[1] + " " + burgers[2]);
+            String output = burgersArray[i][0] + " W " + burgersArray[i][1] + " " + burgersArray[i][2];
+            System.out.println((i + 1) + ". " + output);
         }
     }
 
-
     public void selectMenu(Scanner scanner, Order order) {
         int choice = scanner.nextInt();
-        int i = choice -1; // 인덱스를 계산하여 저장
-        if (i >= 0 && i < burgersArray.length){
-            System.out.println(Arrays.toString(burgersArray[i]));
+        int i = choice - 1; // 인덱스를 계산하여 저장
+        if (i >= 0 && i < burgersArray.length) {
+            String[] originalMenu = burgersArray[i].clone(); // 원본 메뉴 정보 보관
+            String output = burgersArray[i][0] + " W " + burgersArray[i][1] + " " + burgersArray[i][2];
+            System.out.println(output);
+
+            // 옵션의 영향을 받아 기존의 데이터가 바뀜
+            optionArray(scanner, burgersArray, i);
+            output = burgersArray[i][0] + " W " + burgersArray[i][1] + " " + burgersArray[i][2];
+            System.out.println(output);
             System.out.println("위 메뉴를 장바구니에 추가하시겠습니까? \n1. 확인\n2. 취소");
             int userChoice = scanner.nextInt();
             if (userChoice == 1) {
                 System.out.println((burgersArray[i][0]) + "가 장바구니에 추가되었습니다.");
                 String[] selectedMenu = burgersArray[i];
-                order.addToCart(selectedMenu);
+                List<String> selectedMenuList = Arrays.asList(selectedMenu);
+                order.addToCart(selectedMenuList);
             }
+
+            // 원본 데이터로 되돌림
+            burgersArray[i] = originalMenu;
         }
     }
 
+
+    // 옵션 선택에 따른 배열 변형 메서드
+    public static void optionArray(Scanner scanner, String[][] burgersArray, int i) {
+        System.out.println("위 메뉴의 어떤 옵션으로 추가하시겠습니까? \n1. Single\n2. Double");
+        int choice = scanner.nextInt();
+        double price = Double.parseDouble(burgersArray[i][1]); // String 가격을 숫자로 변환
+        if (choice == 1) {
+            if (!burgersArray[i][0].endsWith("(Single)")){ // 중복된 옵션 추가 방지
+                burgersArray[i][0] += "(Single)";
+            }
+            price += 0;
+        } else if (choice == 2) {
+            if (!burgersArray[i][0].endsWith("(Double)")){ // 중복된 옵션 추가 방지
+                burgersArray[i][0] += "(Double)";
+            }
+            price += 3.6;
+        }
+        burgersArray[i][1] = String.valueOf(price); // 다시 String 가격으로 변환
+    }
 }
+
+

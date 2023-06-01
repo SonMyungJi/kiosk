@@ -1,6 +1,7 @@
 package homework.kiosk;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Drinks extends Menu {
@@ -16,8 +17,8 @@ public class Drinks extends Menu {
         System.out.println();
         System.out.println("[ Drinks MENU ]");
         for (int i = 0; i < drinksArray.length; i++) {
-            String[] drinks = drinksArray[i];
-            System.out.println((i + 1) + ". " + (drinks[0]) + " W " + drinks[1] + " " + drinks[2]);
+            String output = drinksArray[i][0] + " W " + drinksArray[i][1] + " " + drinksArray[i][2];
+            System.out.println((i + 1) + ". " + output);
         }
     }
 
@@ -25,13 +26,15 @@ public class Drinks extends Menu {
         int choice = scanner.nextInt();
         int i = choice -1; // 인덱스를 계산하여 저장
         if (i >= 0 && i < drinksArray.length){
-            System.out.println(Arrays.toString(drinksArray[i]));
+            String output = drinksArray[i][0] + " W " + drinksArray[i][1] + " " + drinksArray[i][2];
+            System.out.println(output);
             System.out.println("위 메뉴를 장바구니에 추가하시겠습니까? \n1. 확인\n2. 취소");
             int userChoice = scanner.nextInt();
             if (userChoice == 1) {
                 System.out.println((drinksArray[i][0]) + "가 장바구니에 추가되었습니다.");
                 String[] selectedMenu = drinksArray[i];
-                order.addToCart(selectedMenu);
+                List<String> selectedMenuList = Arrays.asList(selectedMenu);
+                order.addToCart(selectedMenuList);
             }
         }
     }

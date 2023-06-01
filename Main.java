@@ -20,6 +20,7 @@ public class Main {
                     Burgers burgers = new Burgers();
                     burgers.displayMenu();
                     burgers.selectMenu(scanner, order);
+
                     break;
                 case 2:
                     Frozen frozen = new Frozen();
@@ -37,8 +38,7 @@ public class Main {
                     beer.selectMenu(scanner, order);
                     break;
                 case 5:
-                    order.show();
-                    order.sell(scanner);
+                    order.show(scanner);
                     break;
                 case 6:
                     order.cancel(scanner);

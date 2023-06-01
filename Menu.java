@@ -20,6 +20,7 @@ class Menu {
     };
 
     public void displayMenu() {
+        System.out.println();
         System.out.println("SHAKESHACK BURGER에 오신 걸 환영합니다.");
         System.out.println("아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.");
         System.out.println();
