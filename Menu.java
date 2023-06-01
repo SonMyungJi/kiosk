@@ -29,5 +29,4 @@ class Menu {
             System.out.println((i + 1) + ". " + (menu[0]) + ": " + menu[1]);
         }
     }
-
 }

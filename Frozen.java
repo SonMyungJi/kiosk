@@ -4,9 +4,6 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Frozen extends Menu {
-    public Frozen() {
-        super();
-    }
 
     static String[][] frozenArray = {
             {"딸기 아이스크림", "5.0", "딸기가 좋아"},
@@ -26,14 +23,14 @@ public class Frozen extends Menu {
 
     public void selectMenu(Scanner scanner, Order order) {
         int choice = scanner.nextInt();
-        int index = choice -1; // 인덱스를 계산하여 저장
-        if (index >= 0 && index < frozenArray.length){
-            System.out.println(Arrays.toString(frozenArray[index]));
+        int i = choice -1; // 인덱스를 계산하여 저장
+        if (i >= 0 && i < frozenArray.length){
+            System.out.println(Arrays.toString(frozenArray[i]));
             System.out.println("위 메뉴를 장바구니에 추가하시겠습니까? \n1. 확인\n2. 취소");
             int userChoice = scanner.nextInt();
             if (userChoice == 1) {
-                System.out.println((frozenArray[index][0]) + "가 장바구니에 추가되었습니다.");
-                String[] selectedMenu = frozenArray[index];
+                System.out.println((frozenArray[i][0]) + "가 장바구니에 추가되었습니다.");
+                String[] selectedMenu = frozenArray[i];
                 order.addToCart(selectedMenu);
             }
         }

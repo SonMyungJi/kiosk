@@ -4,7 +4,6 @@ package homework.kiosk;
 import java.util.*;
 
 class Order {
-    static Scanner scanner = new Scanner(System.in);
 
     // 메뉴판 5번, 6번
     String[][] orderArray = {
@@ -20,9 +19,10 @@ class Order {
         }
     }
 
-    // 장바구니에 객체 추가
-    // 주문 개수 기능 추가
-    private float totalSum;
+    // 장바구니에 객체 넣기 Arraylist
+    // 주문 시 중복은 없애되 몇 번 선택되었는지 확인할 수 있는 HashMap
+    // 판매 완료시 팔린 메뉴들을 순서대로 출력할 수 있는 LinkedHashMap
+    private double totalSum; // 총 팔린 금액
     private final HashMap<String[], Integer> cart = new HashMap<>();
     private final LinkedHashMap<String[], Integer> soldProducts = new LinkedHashMap<>();
 
@@ -37,19 +37,16 @@ class Order {
     }
 
     // 가격을 더하는 메서드
-    float priceSum() {
-        float priceSum = 0.0f;
+    double priceSum() {
+        double priceSum = 0.0;
 
         for (Map.Entry<String[], Integer> entry : cart.entrySet()) {
             String[] selectedMenu = entry.getKey();
             int count = entry.getValue();
 
-            float price = Float.parseFloat(selectedMenu[1]);
+            double price = Double.valueOf(selectedMenu[1]);
             priceSum += price * count;
         }
-
-        // 반올림하여 소수점 첫째 자리까지 표시
-        priceSum = Math.round(priceSum * 10.0f) / 10.0f;
 
         return priceSum;
     }
@@ -59,23 +56,25 @@ class Order {
         System.out.println("아래와 같이 주문하시겠습니까?");
         System.out.println();
         System.out.println("[ Orders ]");
-        if (cart.isEmpty()){
+        if (cart.isEmpty()) {
             System.out.println("장바구니가 비어 있습니다.");
             return;
         } else {
             for (Map.Entry<String[], Integer> entry : cart.entrySet()) {
                 String[] item = entry.getKey();
                 int count = entry.getValue();
-                System.out.printf("%-15s W %2s %2s개 %2s\n", item[0], item[1], count, item[2] );
+                System.out.printf("%-15s W %2s %2s개 %2s\n", item[0], item[1], count, item[2]);
             }
         }
         System.out.println();
         System.out.println("[ Total ]");
-        System.out.println("W "+ priceSum());
+        System.out.println("W " + priceSum());
+    }
+
+    public void sell(Scanner scanner) {
         System.out.println("\n1. 주문\n2. 메뉴판");
         int choice = scanner.nextInt();
         if (choice==1) {
-            float priceSum = priceSum();
             totalSum += priceSum();
 
             // 주문이 완료되면 해당 주문의 상품들을 판매된 상품 목록에 추가
@@ -92,9 +91,9 @@ class Order {
             System.out.println("대기번호는 입니다.");
             System.out.println("3초 후 메뉴판으로 돌아갑니다.");
         }
-    }
+    };
 
-    public void cancel() {
+    public void cancel(Scanner scanner) {
         System.out.println("진행하던 주문을 취소하시겠습니까?\n1. 확인\n2. 취소");
         int choice = scanner.nextInt();
         if (choice==1){
@@ -103,10 +102,16 @@ class Order {
         }
     }
 
-    // 총 판매금액을 더하는 메서드
-    float totalSum() {
-        return totalSum;
+
+    // 0번 기능
+    public void hidden(Scanner scanner) {
+        System.out.println("[ 총 판매금액 현황 ]");
+        System.out.println("현재까지 총 판매된 금액은 [ W "+totalSum+" ] 입니다.");
+        System.out.println();
+        showSoldProducts();
+        int choice = scanner.nextInt(); // 숫자를 입력한 뒤에 메인메뉴로 돌아감
     }
+
 
     // 총 판매상품 목록 조회 기능 메서드
     public void showSoldProducts() {
@@ -115,19 +120,10 @@ class Order {
         System.out.println();
         for (Map.Entry<String[], Integer> entry : soldProducts.entrySet()) {
             String[] productKey = entry.getKey();
-            int count = entry.getValue();
+//            int count = entry.getValue();
             System.out.println(Arrays.toString(productKey));
         }
         System.out.println();
         System.out.println("1. 돌아가기");
-    }
-
-
-    public void hidden() {
-        System.out.println("[ 총 판매금액 현황 ]");
-        System.out.println("현재까지 총 판매된 금액은 [ W "+totalSum()+" ] 입니다.");
-        System.out.println();
-        showSoldProducts();
-        int choice = scanner.nextInt();
     }
 }
