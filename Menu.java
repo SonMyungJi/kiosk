@@ -2,14 +2,10 @@ package homework.kiosk;
 
 public class Menu {
 
-    String name;
     double price;
-    String desc;
 
     public Menu() {
-        this.name = name;
         this.price = price;
-        this.desc = desc;
     }
 
     static String[][] menuArray = {

@@ -28,7 +28,7 @@ public class Product extends Menu {
             {"India IPA", "8.9", "인도에서 온 홉의 향기와 과일향이 조화로운 IPA"},
     };
 
-    private Map<String, String[][]> menuMap;
+    final private Map<String, String[][]> menuMap;
 
     public Product() {
         super();
