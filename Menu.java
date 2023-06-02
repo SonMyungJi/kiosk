@@ -2,12 +2,6 @@ package homework.kiosk;
 
 public class Menu {
 
-    double price;
-
-    public Menu() {
-        this.price = price;
-    }
-
     static String[][] menuArray = {
             {"Burgers", "앵거스 비프 통살을 다져 만든 버거"},
             {"Frozen Custard", "매장에서 신선하게 만드는 아이스크림"},

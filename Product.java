@@ -31,7 +31,6 @@ public class Product extends Menu {
     final private Map<String, String[][]> menuMap;
 
     public Product() {
-        super();
         menuMap = new HashMap<>();
         menuMap.put("burgers", burgersArray);
         menuMap.put("frozen", frozenArray);
