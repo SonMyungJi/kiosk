@@ -1,6 +1,6 @@
 package homework.kiosk;
 
-class Menu {
+public class Menu {
 
     String name;
     double price;

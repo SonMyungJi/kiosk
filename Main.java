@@ -8,6 +8,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Menu menu = new Menu();
         Order order = new Order();
+        Product product = new Product();
 
         while (true) {
             menu.displayMenu();
@@ -17,25 +18,21 @@ public class Main {
             int number = scanner.nextInt();
             switch (number) {
                 case 1:
-                    Burgers burgers = new Burgers();
-                    burgers.displayMenu();
-                    burgers.selectMenu(scanner, order);
+                    product.displayMenu("burgers");
+                    product.selectMenu("burgers", scanner, order);
 
                     break;
                 case 2:
-                    Frozen frozen = new Frozen();
-                    frozen.displayMenu();
-                    frozen.selectMenu(scanner, order);
+                    product.displayMenu("frozen");
+                    product.selectMenu("frozen", scanner, order);
                     break;
                 case 3:
-                    Drinks drinks = new Drinks();
-                    drinks.displayMenu();
-                    drinks.selectMenu(scanner, order);
+                    product.displayMenu("drinks");
+                    product.selectMenu("drinks", scanner, order);
                     break;
                 case 4:
-                    Beer beer = new Beer();
-                    beer.displayMenu();
-                    beer.selectMenu(scanner, order);
+                    product.displayMenu("beer");
+                    product.selectMenu("beer", scanner, order);
                     break;
                 case 5:
                     order.show(scanner);
