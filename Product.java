@@ -99,19 +99,16 @@ public class Product extends Menu {
             int choice = scanner.nextInt();
 
             if (choice == 1) {
-                if (!burgersArray[i][0].endsWith("(Single)")) { // 중복된 옵션 추가 방지
                     burgersArray[i][0] += "(Single)";
-                }
                 price += 0;
                 isValidChoice = true;
             } else if (choice == 2) {
-                if (!burgersArray[i][0].endsWith("(Double)")) { // 중복된 옵션 추가 방지
                     burgersArray[i][0] += "(Double)";
-                }
+            } else {
+                // 아무 일도 벌어지지 않음
+            }
                 price += 3.6;
                 isValidChoice = true;
-            } else { // while문 처음으로 돌아감. 아무 일도 발생하지 않음.
-            }
         }
 
         burgersArray[i][1] = String.valueOf(price); // 다시 String 가격으로 변환
