@@ -46,7 +46,7 @@ public class Main {
                 case 0:
                     order.hidden(scanner);
                     break;
-                default:
+                default: break;
             }
         }
     }

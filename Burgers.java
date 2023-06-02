@@ -43,7 +43,7 @@ class Burgers extends Menu {
                 String[] selectedMenu = burgersArray[i];
                 List<String> selectedMenuList = Arrays.asList(selectedMenu);
                 order.addToCart(selectedMenuList);
-            }
+            } // 1이 아닌 숫자를 누르면 메뉴판으로 돌아감
 
             // 원본 데이터로 되돌림
             burgersArray[i] = originalMenu;
@@ -54,21 +54,30 @@ class Burgers extends Menu {
     // 옵션 선택에 따른 배열 변형 메서드
     public static void optionArray(Scanner scanner, String[][] burgersArray, int i) {
         System.out.println("위 메뉴의 어떤 옵션으로 추가하시겠습니까? \n1. Single\n2. Double");
-        int choice = scanner.nextInt();
+        boolean isValidChoice = false;
         double price = Double.parseDouble(burgersArray[i][1]); // String 가격을 숫자로 변환
-        if (choice == 1) {
-            if (!burgersArray[i][0].endsWith("(Single)")){ // 중복된 옵션 추가 방지
-                burgersArray[i][0] += "(Single)";
+
+        while (!isValidChoice) {
+            int choice = scanner.nextInt();
+
+            if (choice == 1) {
+                if (!burgersArray[i][0].endsWith("(Single)")) { // 중복된 옵션 추가 방지
+                    burgersArray[i][0] += "(Single)";
+                }
+                price += 0;
+                isValidChoice = true;
+            } else if (choice == 2) {
+                if (!burgersArray[i][0].endsWith("(Double)")) { // 중복된 옵션 추가 방지
+                    burgersArray[i][0] += "(Double)";
+                }
+                price += 3.6;
+                isValidChoice = true;
+            } else { // while문 처음으로 돌아감. 아무 일도 발생하지 않음.
             }
-            price += 0;
-        } else if (choice == 2) {
-            if (!burgersArray[i][0].endsWith("(Double)")){ // 중복된 옵션 추가 방지
-                burgersArray[i][0] += "(Double)";
-            }
-            price += 3.6;
         }
+
         burgersArray[i][1] = String.valueOf(price); // 다시 String 가격으로 변환
     }
-}
 
+}
 
