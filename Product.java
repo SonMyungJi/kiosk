@@ -34,7 +34,7 @@ public class Product extends Menu {
         super();
         menuMap = new HashMap<>();
         menuMap.put("burgers", burgersArray);
-        menuMap.put("frzoen", frozenArray);
+        menuMap.put("frozen", frozenArray);
         menuMap.put("drinks", drinksArray);
         menuMap.put("beer", beerArray);
     }
